@@ -1,0 +1,15 @@
+---
+title: "training_2"
+author: "huifang"
+date: "19 June 2019"
+output: html_document
+---
+#we will learn ggplot2
+
+
+```{r}
+library(tidyverse)
+
+```
+
+
