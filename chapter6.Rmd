@@ -1,0 +1,110 @@
+---
+title: "dplyr"
+author: "huifang"
+date: "19 June 2019"
+output: html_document
+---
+#chapter6 data wrangling  dplyr
+
+```{r}
+library(tidyverse)  
+
+```
+
+load data
+
+```{r}
+## read gapminder csv. Note the readr:: prefix identifies which package it's in
+gapminder <- readr::read_csv('https://raw.githubusercontent.com/OHI-Science/data-science-training/master/data/gapminder.csv') 
+
+
+
+```
+
+
+```{r}
+gapminder
+head(gapminder) # shows first 6
+tail(gapminder) # shows last 6
+
+head(gapminder, 10) # shows first X that you indicate
+tail(gapminder, 12) # guess what this does!
+
+
+
+```
+
+```{r}
+
+str(gapminder) # ?str - displays the structure of an object
+
+```
+
+
+```{r}
+names(gapminder)
+dim(gapminder)    # ?dim dimension
+ncol(gapminder)   # ?ncol number of columns
+nrow(gapminder)   # ?nrow number of rows
+
+```
+
+
+```{r}
+summary(gapminder)
+
+library(skimr) # install.packages('skimr')
+skim(gapminder)
+
+```
+
+```{r}
+install.packages("skimr")
+```
+
+Look at the variables inside a data.frame
+
+```{r}
+gapminder$lifeExp # very long! hard to make sense of...
+head(gapminder$lifeExp) # can do the same tests we tried before
+str(gapminder$lifeExp) # it is a single numeric vector
+summary(gapminder$lifeExp) # same information, formatted slightly differently
+
+```
+
+
+dplyr basics
+
+```{r}
+filter(gapminder, lifeExp < 29)
+
+```
+
+
+```{r}
+filter(gapminder, country == "Mexico")
+```
+
+```{r}
+filter(gapminder, country %in% c("Mexico", "Peru"))
+
+```
+
+```{r}
+filter(gapminder, country == "Mexico", year == 2002)
+
+```
+
+```{r}
+x <- filter(gapminder, country == "Brazil", year > 1986, year<2008)  
+mean(x$lifeExp)  
+```
+
+
+```{r}
+
+
+
+
+```
+
