@@ -107,4 +107,132 @@ select(gapminder, year, country, lifeExp)
 
 
 ```
+```{r}
+select(gapminder, -continent, -lifeExp) # you can use - to deselect columns
+
+```
+
+
+```{r}
+gap_cambodia  <- filter(gapminder, country == "Cambodia")
+gap_cambodia2 <- select(gap_cambodia, -continent, -lifeExp) 
+
+```
+
+
+```{r}
+gapminder %>% head()
+gapminder %>% head(3)
+```
+
+```{r}
+#%>%  ctrl+shift+m
+```
+
+
+```{r}
+## instead of this...
+gap_cambodia  <- filter(gapminder, country == "Cambodia")
+gap_cambodia2 <- select(gap_cambodia, -continent, -lifeExp) 
+
+## ...we can do this
+gap_cambodia  <- gapminder %>% filter(country == "Cambodia")
+gap_cambodia2 <- gap_cambodia %>% select(-continent, -lifeExp) 
+
+```
+
+```{r}
+gap_cambodia  <- gapminder %>% 
+  filter(country == "Cambodia") %>%
+  select(-continent, -lifeExp) 
+
+```
+
+mutate() adds new variables
+
+```{r}
+gapminder %>%
+  mutate(gdp = pop * gdpPercap)
+ #same as: mutate(gapminder, gdp=pop*gdpPercap)
+```
+
+
+```{r}
+gapminder %>%
+  filter(continent == "Asia",
+         year == 2007) %>%
+  mutate(pop_thousands = pop/1000) %>%
+  select(country, year, pop_thousands) #this cleans up the dataframe but isn't necessary
+
+```
+
+
+group_by() operates on groups
+```{r}
+gapminder %>%
+  filter(year == 2002) %>%
+  group_by(continent) %>% 
+  mutate(cont_pop = sum(pop))
+
+```
+
+
+summarize() with group_by()
+```{r}
+gapminder %>%
+  group_by(continent) %>%
+  summarize(cont_pop = sum(pop)) %>%
+  ungroup()
+
+
+```
+
+```{r}
+gapminder %>%
+  group_by(continent, year) %>%
+  summarize(cont_pop = sum(pop))
+
+```
+
+arrange() orders columns
+```{r}
+gapminder %>%
+  group_by(continent, year) %>%
+  summarize(cont_pop = sum(pop)) %>%
+  arrange(year)
+
+```
+
+```{r}
+gapminder %>%
+  mutate(gdp = pop * gdpPercap) %>%
+  group_by(continent) %>%
+  mutate(max_gdp = max(gdp)) %>%
+  filter(gdp == max_gdp)
+
+```
+
+```{r}
+
+gapminder %>%
+  mutate(gdp = pop * gdpPercap) %>%
+  group_by(lifeExp) %>%
+  mutate(max_gdp = max(gdp)) %>%
+  filter(gdp == max_gdp)
+
+
+
+```
+
+
+All together now
+```{r}
+
+
+```
+
+
+
+
+
 
